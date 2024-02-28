@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+//
 export default function Hero() {
   return (
     <session className="grid grid-cols-2">
