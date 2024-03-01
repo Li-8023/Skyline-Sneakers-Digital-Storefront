@@ -25,7 +25,7 @@ export default function Hero() {
           </button>
         </div>
       </div>
-      <div className="relative">
+      <div className="relative mt-2">
         <Image
           src={"/pizza.png"}
           layout={"fill"}

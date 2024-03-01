@@ -1,10 +1,19 @@
-export default function HomeMenu(){
-    return (
-      <section>
-        <div className="text-center">
-          <h3 className="uppercase text-gray-500 font-semibold leading-4">Check out</h3>
-          <h2 className="text-primary font-bold text-4xl italic">Menu</h2>
-        </div>
-      </section>
-    );
+import MenuItem from "@/components/Menu/MenuItem";
+import SectionHeaders from "@/components/Layout/SectionHeaders";
+export default function HomeMenu() {
+  return (
+    <section>
+      <div className="text-center mt-4 mb-4">
+        <SectionHeaders subHeader={'check out'} mainHeader={'Menu'} />
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+      </div>
+    </section>
+  );
 }
