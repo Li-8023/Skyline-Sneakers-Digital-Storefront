@@ -17,8 +17,13 @@
         "name": "next"
       }
     ],
+    // "baseUrl": ".",
+    // "include":["."],
+    // "module":"ES2020",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/app/*": ["./src/app/*"],
+      // "@/models/*": ["src/app/models/*"],
+      "@/components/*": ["./src/components/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
