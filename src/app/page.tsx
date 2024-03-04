@@ -7,7 +7,6 @@ import SessionHeaders from "@/components/Layout/SectionHeaders";
 export default function Home() {
   return (
     <>
-      
       <Hero/>
       <HomeMenu/>
       <section className="text-center my-16">
