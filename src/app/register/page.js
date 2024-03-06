@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 export default function RegisterPage() {
   //creates a state variable named "email" and a function to
@@ -18,18 +19,16 @@ export default function RegisterPage() {
     setError(false);
     setUserCreated(false);
     const response = await fetch("/api/register", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: { "Content-Type": "application/json" },
-      });
-      if(response.ok){
-        setUserCreated(true);
-      }
-      else{
-        setError(true);
-      }
-      setCreatingUser(false);
-    
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.ok) {
+      setUserCreated(true);
+    } else {
+      setError(true);
+    }
+    setCreatingUser(false);
   }
   return (
     <section className="mt-4">
@@ -45,7 +44,7 @@ export default function RegisterPage() {
       )}
       {error && (
         <div className="my-4 text-center">
-          An error has occurred. <br/>
+          An error has occurred. <br />
           Please try again later
         </div>
       )}
@@ -71,11 +70,20 @@ export default function RegisterPage() {
         <div className="my-4 text-center text-gray-500">
           or login with provider
         </div>
-        <button className="flex gap-4 justify-center">
+        <button
+          type="button"
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+          className="flex gap-4 justify-center"
+        >
           <Image src={"/google.png"} alt={""} width={24} height={24} />
           Login with Google
         </button>
-        <div className="text-center my-4 text-gray-500 border-t pt-4">Existing account?{' '} <Link className="underline" href={'/login'}>Login here &raquo;</Link></div>
+        <div className="text-center my-4 text-gray-500 border-t pt-4">
+          Existing account?{" "}
+          <Link className="underline" href={"/login"}>
+            Login here &raquo;
+          </Link>
+        </div>
       </form>
     </section>
   );
