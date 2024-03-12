@@ -12,11 +12,17 @@ export async function PUT(req) {
 
   const user = await User.findOne({ email });
 
-  console.log(session, data);
+  const update = {};
   if ("name" in data) {
-    //update user name
-    await User.updateOne({ email }, { name: data.name });
+    update.name = data.name;
   }
-  
+  if ("image" in data) {
+    update.image = data.image;
+  }
+  if (Object.keys(update).length > 0) {
+    //update user name
+    await User.updateOne({ email }, update);
+  }
+
   return Response.json(true);
 }
