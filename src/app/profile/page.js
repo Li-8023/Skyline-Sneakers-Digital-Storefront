@@ -2,37 +2,64 @@
 import { useSession } from "next-auth/react";
 import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
+import { resolve } from "path";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function ProfilePage() {
   const session = useSession();
   const { status } = session;
   const [userName, setUserName] = useState("");
   const [image, setImage] = useState("");
-  const [saved, setSaved] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
 
   useEffect(() => {
     if (status === "authenticated") {
       setUserName(session.data.user.name);
       setImage(session.data.user.image);
+      fetch("/api/profile").then((response) => {
+        response.json().then((data) => {
+          setPhone(data.phone);
+          setStreetAddress(data.streetAddress);
+          setPostalCode(data.postalCode);
+          setCity(data.city);
+          setCountry(data.country);
+        });
+      });
     }
   }, [session, status]);
 
   async function handleProfileInfoUpdate(ev) {
     ev.preventDefault();
-    setSaved(false);
-    setIsSaving(true);
-    const response = await fetch("/api/profile", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: userName, image }),
+
+    const savingPromise = new Promise(async (resolve, reject) => {
+      const response = await fetch("/api/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: userName,
+          image,
+          streetAddress,
+          phone,
+          postalCode,
+          city,
+          country,
+        }),
+      });
+
+      if (response.ok) resolve();
+      else reject();
     });
-    setIsSaving(false);
-    if (response.ok) {
-      setSaved(true);
-    }
+
+    await toast.promise(savingPromise, {
+      loading: "Saving...",
+      success: "Profile saved successfully!",
+      error: "Couldn't save profile",
+    });
   }
 
   async function handleFileChange(ev) {
@@ -40,14 +67,26 @@ export default function ProfilePage() {
     if (files?.length === 1) {
       const data = new FormData();
       data.set("file", files[0]);
-      setIsUploading(true);
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: data,
+
+      const uploadPromise = new Promise(async (resolve, reject) => {
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: data,
+        });
+        if (response.ok) {
+          const link = await response.json();
+          setImage(link);
+          resolve();
+        } else {
+          reject();
+        }
       });
-      const link = await response.json();
-      setImage(link);
-      setIsUploading(false);
+
+      await toast.promise(uploadPromise, {
+        loading: "Uploading...",
+        success: "Upload Success!",
+        error: "Upload Error",
+      });
     }
   }
 
@@ -64,22 +103,7 @@ export default function ProfilePage() {
       <h1 className="text-center text-primary text-4xl mb-4">Profile</h1>
 
       <div className="max-w-md mx-auto">
-        {saved && (
-          <h2 className="text-center bg-green-100 p-4 rounded-lg border-1 border-green-300">
-            Profile saved!
-          </h2>
-        )}
-        {isSaving && (
-          <h2 className="text-center bg-blue-100 p-4 rounded-lg border-1 border-blue-300">
-            Saving...
-          </h2>
-        )}
-        {isUploading && (
-          <h2 className="text-center bg-blue-100 p-4 rounded-lg border-1 border-blue-300">
-            Uploading...
-          </h2>
-        )}
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4">
           <div>
             <div className="p-2 rounded-lg relative max-w-[120px]">
               {image && (
@@ -105,16 +129,54 @@ export default function ProfilePage() {
             </div>
           </div>
           <form className="grow" onSubmit={handleProfileInfoUpdate}>
+            <label>First and last nem</label>
             <input
               type="text"
               placeholder="First and last name"
               value={userName}
               onChange={(ev) => setUserName(ev.target.value)}
             />
+            <label>Email</label>
             <input
               type="email"
               value={session.data.user.email}
               disabled={true}
+              placeholder="email address"
+            ></input>
+            <label>Phone</label>
+            <input
+              type="tel"
+              placeholder="Phone number"
+              value={phone}
+              onChange={(ev) => setPhone(ev.target.value)}
+            ></input>
+            <input
+              type="text"
+              placeholder="Street address"
+              value={streetAddress}
+              onChange={(ev) => setStreetAddress(ev.target.value)}
+            ></input>
+            <div className="flex gap-2">
+              <input
+                style={{ margin: "0" }}
+                type="text"
+                placeholder="Postal code"
+                value={postalCode}
+                onChange={(ev) => setPostalCode(ev.target.value)}
+              ></input>
+              <input
+                style={{ margin: "0" }}
+                type="text"
+                placeholder="City"
+                value={city}
+                onChange={(ev) => setCity(ev.target.value)}
+              ></input>
+            </div>
+            <input
+              type="text"
+              placeholder="Country"
+              value={country}
+              onChange={(ev) => setCountry(ev.target.value)}
             ></input>
             <button type="submit">Save</button>
           </form>
