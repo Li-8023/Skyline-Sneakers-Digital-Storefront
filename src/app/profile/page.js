@@ -5,6 +5,8 @@ import Image from "next/image";
 import { resolve } from "path";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Link from "next/link";
+import UserTabs from "@/components/Layout/UserTabs";
 
 export default function ProfilePage() {
   const session = useSession();
@@ -16,19 +18,22 @@ export default function ProfilePage() {
   const [postalCode, setPostalCode] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
-
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [profileFetched, setProfileFetched] = useState(false);
   useEffect(() => {
     if (status === "authenticated") {
       setUserName(session.data.user.name);
       setImage(session.data.user.image);
-      fetch("/api/profile").then((response) => {
+      fetch("/api/profile").then(response => {
         response.json().then((data) => {
           setPhone(data.phone);
           setStreetAddress(data.streetAddress);
           setPostalCode(data.postalCode);
           setCity(data.city);
           setCountry(data.country);
-        });
+          setIsAdmin(data.admin);
+          setProfileFetched(true);
+        })
       });
     }
   }, [session, status]);
@@ -90,7 +95,7 @@ export default function ProfilePage() {
     }
   }
 
-  if (status === "loading") {
+  if (status === "loading"|| !profileFetched) {
     return "Loading...";
   }
 
@@ -100,9 +105,9 @@ export default function ProfilePage() {
 
   return (
     <section className="mt-4">
-      <h1 className="text-center text-primary text-4xl mb-4">Profile</h1>
+      <UserTabs isAdmin={isAdmin} />
 
-      <div className="max-w-md mx-auto">
+      <div className="max-w-md mx-auto mt-4">
         <div className="flex gap-4">
           <div>
             <div className="p-2 rounded-lg relative max-w-[120px]">
@@ -150,6 +155,7 @@ export default function ProfilePage() {
               value={phone}
               onChange={(ev) => setPhone(ev.target.value)}
             ></input>
+            <label>Street address</label>
             <input
               type="text"
               placeholder="Street address"
@@ -157,21 +163,26 @@ export default function ProfilePage() {
               onChange={(ev) => setStreetAddress(ev.target.value)}
             ></input>
             <div className="flex gap-2">
-              <input
-                style={{ margin: "0" }}
-                type="text"
-                placeholder="Postal code"
-                value={postalCode}
-                onChange={(ev) => setPostalCode(ev.target.value)}
-              ></input>
-              <input
-                style={{ margin: "0" }}
-                type="text"
-                placeholder="City"
-                value={city}
-                onChange={(ev) => setCity(ev.target.value)}
-              ></input>
+              <div>
+                <label>Postal code</label>
+                <input
+                  type="text"
+                  placeholder="Postal code"
+                  value={postalCode}
+                  onChange={(ev) => setPostalCode(ev.target.value)}
+                ></input>
+              </div>
+              <div>
+                <label>City</label>
+                <input
+                  type="text"
+                  placeholder="City"
+                  value={city}
+                  onChange={(ev) => setCity(ev.target.value)}
+                ></input>
+              </div>
             </div>
+            <label>Country</label>
             <input
               type="text"
               placeholder="Country"
