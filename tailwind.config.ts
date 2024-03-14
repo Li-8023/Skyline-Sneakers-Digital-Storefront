@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors:{
-        primary: '#9571ed',
+        primary: '#9C7AB5',
         secondary:'#E7BCDE',
-        tertiary:'#51829B',
+        tertiary:'#D9C5DE',
       }
     },
   },
