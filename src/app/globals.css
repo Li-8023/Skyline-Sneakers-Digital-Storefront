@@ -36,6 +36,12 @@ button{
 }
 button[type="submit"],.submit{
     @apply border-0 bg-primary text-white;
+
+}
+
+button[type="submit"]:hover, .submit:hover{
+    @apply bg-tertiary shadow-2xl;
+
 }
 
 button[type="submit"]:disabled,.submit:disabled {
@@ -47,5 +53,5 @@ div.tabs > *{
 }
 
 div.tabs > *.active{
-    @apply bg-primary text-white;
+    @apply bg-tertiary text-white;
 }

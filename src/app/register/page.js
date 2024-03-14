@@ -32,7 +32,9 @@ export default function RegisterPage() {
   }
   return (
     <section className="mt-4">
-      <h1 className="text-center text-primary text-4xl mb-4">Register</h1>
+      <h1 className="text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text text-4xl mb-4">
+        Register
+      </h1>
       {userCreated && (
         <div className="my-4 text-center">
           User created.

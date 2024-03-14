@@ -13,11 +13,11 @@ export default function Home() {
         <SessionHeaders subHeader={'Our story'} mainHeader={'About us'} />
         <div className="text-gray-500 max-w-md mx-auto mt-4 flex flex-col gap-4">
           <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit hid hdiah dhwid ahdiw dqhwidh bduxahwi dwhidh w99rei 
+          Discover Footprint Haven: Where Every Step Leads to Discovery. At Footprint Haven, we don't just sell shoes;
         </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit hid hdiah dhwid ahdiw dqhwidh bduxahwi dwhidh w99rei 
+        <p>we curate a world of steps. From sleek sneakers to elegant heels, rugged boots to comfy sandals, we've scoured the globe to bring every shoe type under one roof. 
         </p>
-         <p>Lorem ipsum dolor si
+         <p>"Find Your Perfect Step" with us, where your next pair awaits, ready to embark on life's adventures alongside you. Dive into our collection, where every shoe has a story, waiting for you to walk it into yours.
         </p>
         </div>
       </section>
