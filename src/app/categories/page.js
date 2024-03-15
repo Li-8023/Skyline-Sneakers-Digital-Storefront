@@ -1,11 +1,11 @@
 "use client";
 import UserTabs from "@/components/Layout/UserTabs";
 import { useEffect, useState } from "react";
-import { UseProfile } from "../../components/UseProfile";
+import { useProfile } from "../../components/UseProfile";
 import toast from "react-hot-toast";
 
 export default function CategoriesPage() {
-  const { loading: profileLoading, data: profileData } = UseProfile();
+  const { loading: profileLoading, data: profileData } = useProfile();
   const [categoryName, setCategoryName] = useState("");
   const [categories, setCategories] = useState([]);
   const [editedCategory, setEditedCategory] = useState(null);
@@ -13,9 +13,10 @@ export default function CategoriesPage() {
   useEffect(() => {
     fetchCategories();
   }, []);
+  
   function fetchCategories() {
-    fetch("/api/categories").then((response) => {
-      response.json().then((categories) => {
+    fetch("/api/categories").then(response => {
+      response.json().then(categories => {
         setCategories(categories);
       });
     });

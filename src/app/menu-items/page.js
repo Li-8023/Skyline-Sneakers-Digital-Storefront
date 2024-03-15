@@ -1,29 +1,29 @@
 "use client";
 import UserTabs from "@/components/Layout/UserTabs";
-import { UseProfile } from "../../components/UseProfile";
+import { useProfile } from "../../components/UseProfile";
+import Link from "next/link";
+import Right from "@/components/icons/Right.js";
+
 
 export default function MenuItemsPage() {
-  const { loading, data } = UseProfile();
+  const { loading, data } = useProfile();
 
   if (loading) {
-    return "Loading user info...";
+    return "Loading menu items...";
   }
 
   if (!data.admin) {
     return "Not an admin";
   }
   return (
-    <section className="mt-4">
+    // <div>menu item</div>
+    <section className="mt-8 max-w-md mx-auto">
       <UserTabs isAdmin={true} />
-      <form className="mt-8">
-        <div className="flex gap-2">
-          <div>
-            <label>Menu item name</label>
-            <input type="text"></input>
-          </div>{" "}
-          <div></div>
-        </div>
-      </form>
+      <div className="mt-8">
+        <Link className="button" href={"/menu-items/new"}>Create new menu item
+        <Right/>
+        </Link>
+      </div>
     </section>
   );
 }
