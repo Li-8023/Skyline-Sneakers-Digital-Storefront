@@ -1,24 +1,35 @@
 "use client";
 import UserTabs from "@/components/Layout/UserTabs";
 import { useProfile } from "@/components/UseProfile";
-import EditableImage from "@/components/Layout/EditableImage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import Left from "@/components/icons/Left";
-import MenuItemForm from "@/components/Layout/MenuItemForm";
+import { useParams } from "next/navigation";
+import MenuItemForm from "../../../../components/Layout/MenuItemForm";
 
-
-export default function NewMenuItemPage() {
+export default function EditMenuItemPage() {
+  const { id } = useParams();
   const { loading, data } = useProfile();
 
+  const [menuItem, setMenuItem] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/menu-items").then((res) => {
+      res.json().then((items) => {
+        const item = items.find((i) => i._id === id);
+        setMenuItem(item);
+      });
+    });
+  }, []);
 
   async function handleFormSubmit(ev, data) {
     ev.preventDefault();
-    
+
+    data = { ...data, _id: id };
     const savingPromise = new Promise(async (resolve, reject) => {
       const response = await fetch("/api/menu-items", {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       });
@@ -53,7 +64,7 @@ export default function NewMenuItemPage() {
           <span>Show all menu items</span>
         </Link>
       </div>
-      <MenuItemForm menuItem={null} onSubmit={handleFormSubmit}/>
+      <MenuItemForm menuItem={menuItem} onSubmit={handleFormSubmit} />
     </section>
   );
 }
