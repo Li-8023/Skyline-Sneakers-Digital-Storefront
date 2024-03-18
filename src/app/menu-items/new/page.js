@@ -31,7 +31,11 @@ export default function NewMenuItemPage() {
 
     await toast.promise(savingPromise, {
       loading: "Saving this fancy item...",
-      success: "Saved successfully!",
+      success: () => {
+       
+        window.location.href = "/menu-items";
+        return "Saved successfully!";
+      },
       error: "Error",
     });
   }
@@ -47,7 +51,7 @@ export default function NewMenuItemPage() {
   return (
     <section className="mt-4">
       <UserTabs isAdmin={true} />
-      <div className="max-w-md mx-auto mt-8">
+      <div className="max-w-lg mx-auto mt-8">
         <Link className="button" href={"/menu-items"}>
           <Left />
           <span>Show all menu items</span>

@@ -7,7 +7,9 @@ section.hero {
     grid-template-columns: .4fr .6fr;
 }
 
+
 /* use block so the textfield are under each other */
+select,
 input[type="email"],
 input[type="password"],
 input[type="tel"],

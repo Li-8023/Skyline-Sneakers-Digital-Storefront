@@ -7,6 +7,7 @@ import Link from "next/link";
 import Left from "@/components/icons/Left";
 import { useParams } from "next/navigation";
 import MenuItemForm from "../../../../components/Layout/MenuItemForm";
+import DeleteButton from "@/components/DeleteButton";
 
 export default function EditMenuItemPage() {
   const { id } = useParams();
@@ -42,11 +43,36 @@ export default function EditMenuItemPage() {
 
     await toast.promise(savingPromise, {
       loading: "Saving this fancy item...",
-      success: "Saved successfully!",
+      success: () => {
+        window.location.href = "/menu-items";
+        return "Saved successfully!";
+      },
       error: "Error",
     });
   }
 
+  async function handleDeleteClick() {
+    const promise = new Promise(async (resolve, reject) => {
+      const res = await fetch("/api/menu-items?_id=" + id, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
+
+    toast.promise(promise, {
+      loading: "Deleting...",
+      success: () => {
+        window.location.href = "/menu-items";
+        return "Delete successfully!";
+      },
+      error: "Error",
+    });
+  }
   if (loading) {
     return "Loading user info...";
   }
@@ -58,13 +84,21 @@ export default function EditMenuItemPage() {
   return (
     <section className="mt-4">
       <UserTabs isAdmin={true} />
-      <div className="max-w-md mx-auto mt-8">
+      <div className="max-w-lg mx-auto mt-8">
         <Link className="button" href={"/menu-items"}>
           <Left />
           <span>Show all menu items</span>
         </Link>
       </div>
       <MenuItemForm menuItem={menuItem} onSubmit={handleFormSubmit} />
+      <div className="max-w-md mx-auto mt-2">
+        <div className="max-w-xs ml-auto pl-4">
+          <DeleteButton
+            label="Delete this menu item"
+            onDelete={handleDeleteClick}
+          ></DeleteButton>
+        </div>
+      </div>
     </section>
   );
 }

@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import { Category } from "../../models/Category";
+import { URL } from "url";
 
 export async function POST(req) {
-  
   mongoose.connect(process.env.MONGO_URL);
 
   const { name } = await req.json();
@@ -22,5 +22,13 @@ export async function PUT(req) {
 
   const { _id, name } = await req.json();
   await Category.updateOne({ _id }, { name });
+  return Response.json(true);
+}
+
+export async function DELETE(req) {
+  mongoose.connect(process.env.MONGO_URL);
+  const url = new URL(req.url);
+  const _id = url.searchParams.get("_id");
+  await Category.deleteOne({_id});
   return Response.json(true);
 }
