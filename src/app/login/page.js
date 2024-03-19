@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import Link from "next/link";
 import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
@@ -14,14 +13,6 @@ export default function LoginPage() {
     setLoginInProgress(true);
 
     await signIn("credentials", { email, password, callbackUrl: "/" });
-    // const response = await fetch("/api/login", {
-    //   body: JSON.stringify({ email, password }),
-    //   headers: { "Content-Type": "application/json" },
-    //   method: "POST",
-    // });
-    // if (response.ok) {
-    // } else {
-    // }
     setLoginInProgress(false);
   }
   return (
@@ -60,12 +51,6 @@ export default function LoginPage() {
           <Image src={"/google.png"} alt={""} width={24} height={24} />
           Login with Google
         </button>
-        {/* <div className="text-center my-4 text-gray-500 border-t pt-4">
-          Existing account?{" "}
-          <Link className="underline" href={"/login"}>
-            Login here &raquo;
-          </Link>
-        </div> */}
       </form>
     </section>
   );

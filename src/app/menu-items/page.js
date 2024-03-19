@@ -43,10 +43,18 @@ export default function MenuItemsPage() {
                 href={"/menu-items/edit/" + item._id}
                 className=" bg-gray-200 rounded-lg p-4 "
               >
-                <div className="relative">
-                  <Image className="rounded-md" src={item.image} alt={""} width={200} height={200} />
+                <div className="relative text-center flex flex-col items-center">
+                  <Image
+                    className="rounded-md"
+                    src={item.image}
+                    alt={""}
+                    width={200}
+                    height={200}
+                  />
+                  <p>{item.name}</p>
                 </div>
-                <div className="text-center">{item.name}</div>
+
+                {/* <div className="text-center">{item.name}</div> */}
               </Link>
             ))}
         </div>
