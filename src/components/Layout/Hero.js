@@ -7,17 +7,19 @@ export default function Hero() {
     <section className="hero">
       <div className="py-12">
         <h1 className="text-4xl font-semibold">
-          {/* Every Shoe, Every Journey. */}
-          Every Shoe,
-          <br /> Every&nbsp;
+          {/* Stride with Elegance, Land with Style.  */}
+          Stride
+          <br />
+          with Elegance,
+          <br /> Land with&nbsp;
           {/* <br /> with a&nbsp; */}
           <span className="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
-            Journey
+            Style
           </span>
         </h1>
         <p className="my-6 text-gray-500 text-sm">
-          Our carefully curated selection ensures you find
-          the perfect match for any occasion, style, or adventure. 
+          Step into a world where every shoe tells the story of a new adventure
+          waiting to unfold.
         </p>
         <div className="flex gap-4 text-sm">
           <button className="bg-gradient-to-r from-primary to-secondary uppercase flex items-center gap-2 text-white px-4 py-2 rounded-full">

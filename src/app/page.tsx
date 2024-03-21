@@ -12,13 +12,10 @@ export default function Home() {
       <section className="text-center my-16" id="about">
         <SessionHeaders subHeader={'Our story'} mainHeader={'About us'} />
         <div className="text-gray-500 max-w-md mx-auto mt-4 flex flex-col gap-4">
-          <p>
-          Discover Footprint Haven: Where Every Step Leads to Discovery. At Footprint Haven, we don't just sell shoes;
-        </p>
-        <p>we curate a world of steps. From sleek sneakers to elegant heels, rugged boots to comfy sandals, we've scoured the globe to bring every shoe type under one roof. 
-        </p>
-         <p>"Find Your Perfect Step" with us, where your next pair awaits, ready to embark on life's adventures alongside you. Dive into our collection, where every shoe has a story, waiting for you to walk it into yours.
-        </p>
+          <p>Ascend to new heights with Skyline Sneakers – where every step is an elevation of discovery. Here at Skyline Sneakers, it's more than just about selling footwear; it's about offering a launchpad for every stride of your journey.</p>
+          <p>Our collection is a skyline of diverse styles, silhouettes, and stories. From the ground-breaking edge of performance sneakers to the laid-back charm of casual kicks, we soar high and search wide to gather an unparalleled assortment of shoes. We handpick each pair with a vision to suit the eclectic tastes of the adventurers, the trendsetters, the dreamers.</p>
+          <p>"Rise Above the Ordinary" with us. In our world, every pair of sneakers is a vessel for exploration, a companion for your everyday conquests and extraordinary escapades alike. Navigate through our curated collection and discover the pair that resonates with your spirit. Each shoe in our haven is a chapter in a storybook, ready to journey through the chronicles of your life.</p>
+          <p>Step into Skyline Sneakers, where every sole has a saga and every purchase paves the path to new horizons. Your next favorite pair awaits among the clouds, promising to walk with you towards the remarkable and beyond. Join us, and leave footprints on the skyline.</p>
         </div>
       </section>
       <section className="text-center my-8" id="contact">

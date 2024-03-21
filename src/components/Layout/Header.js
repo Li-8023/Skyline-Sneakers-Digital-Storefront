@@ -20,7 +20,7 @@ export default function Header() {
     <header className="flex items-center justify-between">
       <nav className="flex items-center gap-8 text-gray-500 font-semibold">
         <Link className="text-primary font-semibold text-2xl" href="/">
-          StepWardrobe
+          Skyline Sneakers
         </Link>
         <Link href={"/"}>Home</Link>
         <Link href={"/menu"}>Menu</Link>
