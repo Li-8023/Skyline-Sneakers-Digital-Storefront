@@ -1,8 +1,7 @@
 # Skyline-Sneakers-Online-Shopping
 
 ## Demo Video
-[![Watch the video](https://img.youtube.com/vi/SiBWJATJXsc/maxresdefault.jpg)](https://www.youtube.com/watch?v=SiBWJ
-
+[![Watch the video](https://img.youtube.com/vi/SiBWJATJXsc/maxresdefault.jpg)](https://www.youtube.com/watch?v=SiBWJATJXsc)
 
 ## Getting Started
 
