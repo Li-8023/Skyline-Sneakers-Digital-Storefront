@@ -22,6 +22,7 @@ Our website caters to both regular users and administrators, each with distinct 
 - **Authentication**: NextAuth.js for secure and flexible authentication with Google Provider.
 - **Database**: MongoDB for storing and managing user data, product information, and more.
 - **Language**: JavaScript for both frontend and backend development.
+- **Storage**: Use Amazon Web Service (AWS) to store images, we use Amazon Simple Storage Service (Amazon S3), it is a cloud-based storage system.
 
 ## Getting Started
 
