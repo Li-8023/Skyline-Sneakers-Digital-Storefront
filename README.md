@@ -6,11 +6,13 @@ Our website caters to both regular users and administrators, each with distinct 
 
 ### For Users
 - **Account Registration and Login**: Sign up for a new account or log in with Google for a seamless experience.
+- **Multi-factor authentication**: Google and email-based verification.
 - **Product Browsing**: Explore our diverse collection of shoes, with detailed information and pricing for different sizes.
 - **Cart Management**: Add your favorite shoes to the cart, adjust quantities, or remove items as needed.
 - **Size and Price Options**: Each shoe size comes with its own price, offering you the flexibility to choose according to your budget and needs.
 - **Shipping Address**: Update your shipping address anytime to ensure your orders arrive at the right place.
 - **Profile Management**: Update your profile details, including address, city, country, postal code, and profile image.
+  
 
 ### For Administrators
 - **Full Access**: In addition to all user functionalities, administrators can create, edit, and delete product categories and menu items.
@@ -20,7 +22,7 @@ Our website caters to both regular users and administrators, each with distinct 
 
 - **Frontend**: Next.js and React for building a responsive, dynamic user interface and server-side rendering for a seamless user experience. Tailwind CSS for fast and responsive design with a utility-first CSS framework.
 - **Authentication**: NextAuth.js for secure and flexible authentication with Google Provider.
-- **Database**: MongoDB for storing and managing user data, product information, and more.
+- **Database**: MySQL for transactional data and MongoDB for non-transactional data.
 - **Language**: JavaScript for both frontend and backend development.
 - **Storage**: Use Amazon Web Service (AWS) to store images, we use Amazon Simple Storage Service (Amazon S3), it is a cloud-based storage system.
 
